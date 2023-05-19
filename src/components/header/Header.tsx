@@ -1,13 +1,14 @@
 import React from 'react';
 // @ts-ignore
 import logoSvg from '../../assets/img/pizza-logo.svg'
+import {Link} from "react-router-dom";
 
 
 const Header: React.FC = () => {
     return (
         <div className='header'>
             <div className="container">
-                <a href="#">
+                <Link to='/'>
                     <div className='header__logo'>
                         <img width='38' src={logoSvg} alt="Best Shop"/>
                         <div>
@@ -15,9 +16,9 @@ const Header: React.FC = () => {
                             <p>самый лучший магазин во вселенной</p>
                         </div>
                     </div>
-                </a>
+                </Link>
                 <div className="header__cart">
-                    <a href="" className='button button--cart'>
+                    <Link to='/cart' className='button button--cart'>
                         <span>0 ₴</span>
                         <div className="button__delimiter"></div>
                         <svg
@@ -50,7 +51,7 @@ const Header: React.FC = () => {
                             />
                         </svg>
                         <span>0</span>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>
