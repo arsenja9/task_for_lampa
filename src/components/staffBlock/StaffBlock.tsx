@@ -1,19 +1,28 @@
 import React from 'react';
 
-const StaffBlock: React.FC = () => {
+type StaffBlockProps = {
+    id: number,
+    title: string,
+    description: string,
+    price: number,
+    brand: string,
+    thumbnail: string,
+}
+
+const StaffBlock: React.FC<StaffBlockProps> = ({id, brand, description, price, thumbnail, title}) => {
     return (
         <div className='staff-block-wrapper'>
             <div className="staff-block">
                 <div className="staff-block__image">
-                    <img src="https://i.dummyjson.com/data/products/1/3.jpg" alt="iphone"
+                    <img src={thumbnail} alt="iphone"
                          className='pizza-block__image'/>
                 </div>
-                <h4 className='staff-block__title'>Apple: iPhone 9</h4>
+                <h4 className='staff-block__title'>{brand} : {title}</h4>
                 <div className='staff-block__descr'>
-                    An apple mobile which is nothing like apple
+                    {description}
                 </div>
                 <div className="staff-block__bottom">
-                    <div className="staff-block__price">от 550 $</div>
+                    <div className="staff-block__price">от {price} $</div>
                     <button className="button button--outline button--add">
                         <svg
                             width="12"
