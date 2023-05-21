@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from "../components/header/Header";
-import Home from "../pages/Home";
+import {Outlet} from "react-router-dom";
 
 const MainLayout = () => {
     return (
         <div className='wrapper'>
             <Header/>
             <div className="content">
-                <Home/>
+                <Outlet/>
             </div>
         </div>
     );

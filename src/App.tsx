@@ -4,6 +4,7 @@ import MainLayout from "./layout/MainLayout";
 import Home from "./pages/Home";
 
 import './scss/app.scss';
+import Cart from "./pages/Cart";
 
 
 function App() {
@@ -11,6 +12,9 @@ function App() {
     <Routes>
         <Route path='/' element={<MainLayout/>}>
             <Route path='' element={<Home/>}/>
+            <Route path='/cart' element={<React.Suspense fallback={'loading.....'}>
+                <Cart/>
+            </React.Suspense>}/>
         </Route>
     </Routes>
   );
