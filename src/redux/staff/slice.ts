@@ -19,7 +19,6 @@ const staffSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchStaff.pending, (state) => {
             state.status = Status.LOADING;
-            state.items = [];
         });
         builder.addCase(fetchStaff.fulfilled, (state, action) => {
             state.items = action.payload;
@@ -27,7 +26,6 @@ const staffSlice = createSlice({
         });
         builder.addCase(fetchStaff.rejected, (state) => {
             state.status = Status.ERROR;
-            state.items = [];
         });
     },
 });

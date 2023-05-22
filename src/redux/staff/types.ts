@@ -5,7 +5,6 @@ export type Staff = {
     price: number,
     brand: string,
     thumbnail: string,
-    products: any[],
 }
 
 export enum Status {
@@ -16,5 +15,9 @@ export enum Status {
 
 export interface StaffSliceState{
     items: Staff[],
-    status: Status
+    status: Status,
+}
+
+export interface StaffProduct{
+    products: Staff[]
 }

@@ -5,11 +5,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectCart} from "../redux/cart/selectors";
 import {clearItem} from "../redux/cart/slice";
 import CartEmpty from "../components/cartEmpty/CartEmpty";
-import CustomForm from "../components/form/CustomForm";
+import AddForm from "../components/form/AddForm";
 
-const Cart = () => {
+const Cart: React.FC = () => {
     const dispatch = useDispatch();
     const {totalPrice, items} = useSelector(selectCart);
+
+    const totalCount = items.reduce((sum: number, item) => sum + item.count, 0);
 
     const onClickClear = () => {
         if (window.confirm('Очистить корзину?')) {
@@ -20,8 +22,6 @@ const Cart = () => {
     if (!totalPrice) {
         return <CartEmpty/>
     }
-
-    const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
 
     return (
         <div className='container container--cart'>
@@ -63,7 +63,7 @@ const Cart = () => {
                     {
                         items.map((item: any) => <CartItem key={item.id} {...item}/>)
                     }
-                    <CustomForm/>
+                    <AddForm/>
                 </div>
                 <div className='cart__bottom'>
                     <div className="cart__bottom-details">

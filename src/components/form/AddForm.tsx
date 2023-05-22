@@ -1,23 +1,11 @@
 import React from 'react';
 import {useForm, Controller} from "react-hook-form";
-import {object, string} from "yup";
 import {yupResolver} from '@hookform/resolvers/yup';
+import {schema} from "./schemaForAddForm";
+import {CustomFormProps} from "./types";
 
-type CustomFormProps = {
-    name: string,
-    surname: string,
-    address: string
-    phone: string,
-}
 
-const schema = object().shape({
-    name: string().required('Name is required'),
-    surname: string().required('Surname is required'),
-    address: string().required('Address is required'),
-    phone: string().min(8, 'Phone must be at least 8').required('Phone is required')
-})
-
-const CustomForm: React.FC = () => {
+const AddForm: React.FC = () => {
     const {handleSubmit, control, formState: {errors}} = useForm<CustomFormProps>({
         resolver: yupResolver(schema),
     });
@@ -77,4 +65,4 @@ const CustomForm: React.FC = () => {
     );
 };
 
-export default CustomForm;
+export default AddForm;

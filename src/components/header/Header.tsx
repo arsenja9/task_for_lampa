@@ -9,7 +9,7 @@ const Header: React.FC = () => {
     const {items, totalPrice} = useSelector(selectCart);
     const isMounted = React.useRef(false);
 
-    const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
+    const totalCount = items.reduce((sum: number, item) => sum + item.count, 0);
 
     React.useEffect(() => {
         if (isMounted.current) {

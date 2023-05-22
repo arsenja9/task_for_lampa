@@ -2,20 +2,20 @@ import React from 'react';
 
 import Categories from "../components/categories/Categories";
 import StaffBlock from "../components/staffBlock/StaffBlock";
-import {useAppDispatch} from "../redux/store";
-import {useSelector} from "react-redux";
+import {useAppDispatch, useAppSelector} from "../redux/store";
 import {selectStaffData} from "../redux/staff/selectors";
 import {fetchStaff} from "../redux/staff/asyncAction";
 import {selectCategory} from "../redux/filter/selectors";
 import {setCategoryId} from "../redux/filter/slice";
 import Skeleton from "../components/staffBlock/Skeleton";
+import {Staff} from "../redux/staff/types";
 
 const Home: React.FC = () => {
     const dispatch = useAppDispatch();
 
-    const categoryId = useSelector(selectCategory);
-    const {status, items} = useSelector(selectStaffData);
-    // @ts-ignore
+    const categoryId = useAppSelector(selectCategory);
+    const {status, items} = useAppSelector(selectStaffData);
+
     const products = items?.products || [];
 
     const onClickCategory = React.useCallback((id: number | string) => {
@@ -32,7 +32,7 @@ const Home: React.FC = () => {
     }, [categoryId]);
 
     const filteredStaffs = categoryId !== 'all' ? products.filter((obj: any) => obj.category === categoryId) : products;
-    const staffs = filteredStaffs.map((obj: any) => <StaffBlock key={obj.id} {...obj} />);
+    const staffs = filteredStaffs.map((obj: Staff) => <StaffBlock key={obj.id} {...obj} />);
     const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
     return (
         <div className='container'>
