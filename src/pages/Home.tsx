@@ -14,9 +14,8 @@ const Home: React.FC = () => {
     const dispatch = useAppDispatch();
 
     const categoryId = useAppSelector(selectCategory);
-    const {status, items} = useAppSelector(selectStaffData);
+    const {status, items: products} = useAppSelector(selectStaffData);
 
-    const products = items?.products || [];
 
     const onClickCategory = React.useCallback((id: number | string) => {
         dispatch(setCategoryId(id.toString()));

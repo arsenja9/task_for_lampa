@@ -3,8 +3,8 @@ import axios from "axios";
 
 export const fetchStaff = createAsyncThunk(
     'staff/fetchStaffStatus',
-    async (category: string) =>{
+    async () =>{
         const {data} = await axios.get('https://dummyjson.com/products?limit=30')
-        return data
+        return data?.products;
     }
 )
