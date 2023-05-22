@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
-// @ts-ignore
 import cartEmpty from '../../assets/img/empty-cart.png'
 
 const CartEmpty: React.FC = () => {

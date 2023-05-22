@@ -1,11 +1,11 @@
 import React from 'react';
 import CartItem from "../components/cartItem/CartItem";
-import Forms from "../components/form/Forms";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {selectCart} from "../redux/cart/selectors";
 import {clearItem} from "../redux/cart/slice";
 import CartEmpty from "../components/cartEmpty/CartEmpty";
+import CustomForm from "../components/form/CustomForm";
 
 const Cart = () => {
     const dispatch = useDispatch();
@@ -63,7 +63,7 @@ const Cart = () => {
                     {
                         items.map((item: any) => <CartItem key={item.id} {...item}/>)
                     }
-                    <Forms/>
+                    <CustomForm/>
                 </div>
                 <div className='cart__bottom'>
                     <div className="cart__bottom-details">
@@ -84,9 +84,6 @@ const Cart = () => {
                         </svg>
                         <span>Вернуться назад</span>
                     </Link>
-                    <div className="button pay-btn">
-                        <span>Оплатить сейчас</span>
-                    </div>
                 </div>
             </div>
         </div>

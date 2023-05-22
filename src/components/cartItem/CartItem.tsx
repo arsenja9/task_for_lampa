@@ -1,33 +1,38 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
-import {addItem, minusItem, removeItem} from "../../redux/cart/slice";
+import {addItem, clearItem, minusItem, removeItem} from "../../redux/cart/slice";
 import {CartItem} from "../../redux/cart/types";
 
 type CartItemProps = {
-    id: number,
-    title: string,
-    description: string,
-    price: number,
-    brand: string,
-    count: number,
-    thumbnail: string,
+    id: number;
+    title: string;
+    description: string;
+    price: number;
+    brand: string;
+    count: number;
+    thumbnail: string;
+};
 
-}
-
-const CartItemBlock: React.FC<CartItemProps> = ({id, count, brand, description, price, thumbnail, title}) => {
+const CartItemBlock: React.FC<CartItemProps> = ({
+                                                    id,
+                                                    count,
+                                                    brand,
+                                                    description,
+                                                    price,
+                                                    thumbnail,
+                                                    title,
+                                                }) => {
     const dispatch = useDispatch();
 
     const onClickPlus = () => {
-        dispatch(addItem({
-                id,
-            } as CartItem)
-        )
-    }
+        dispatch(addItem({id} as CartItem));
+    };
 
     const onClickMinus = () => {
-        dispatch(minusItem(id))
-    }
-    const onClickRemove = () => {
+        dispatch(minusItem(id));
+    };
+
+    if (count === 0) {
         if (window.confirm('Ты действительно хочешь удалить товар?')) {
             dispatch(removeItem(id))
         }
@@ -38,59 +43,49 @@ const CartItemBlock: React.FC<CartItemProps> = ({id, count, brand, description, 
         <div>
             <div className="cart__item">
                 <div className="cart__item-img">
-                    <img
-                        className='staff-block__image'
-                        src={thumbnail} alt="Staff"/>
+                    <img className="staff-block__image" src={thumbnail} alt="Staff"/>
                 </div>
-                <div className='cart__item-info'>
-                    <h3>{title}: {brand} </h3>
+                <div className="cart__item-info">
+                    <h3>
+                        {title}: {brand}
+                    </h3>
                     <p>{description}</p>
                 </div>
                 <div className="cart__item-count">
                     <button
-                        disabled={count === 1}
                         onClick={onClickMinus}
-                        className="button button--outline button--circle cart__item-count-minus">
-                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                             xmlns="http://www.w3.org/2000/svg">
+                        className="button button--outline button--circle cart__item-count-minus"
+                    >
+                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
-                                d="M5.92001 3.84V5.76V8.64C5.92001 9.17016 5.49017 9.6 4.96001 9.6C4.42985 9.6 4.00001 9.17016 4.00001 8.64L4 5.76L4.00001 3.84V0.96C4.00001 0.42984 4.42985 0 4.96001 0C5.49017 0 5.92001 0.42984 5.92001 0.96V3.84Z"
-                                fill="#EB5A1E"></path>
+                                d="M5.92 3.84V5.76V8.64C5.92 9.17016 5.49017 9.6 4.96 9.6C4.42984 9.6 4 9.17016 4 8.64L4 5.76L4 3.84V0.96C4 0.42984 4.42984 0 4.96 0C5.49017 0 5.92 0.42984 5.92 0.96V3.84Z"
+                                fill="#EB5A1E"
+                            ></path>
                             <path
-                                d="M5.75998 5.92001L3.83998 5.92001L0.959977 5.92001C0.429817 5.92001 -2.29533e-05 5.49017 -2.29301e-05 4.96001C-2.2907e-05 4.42985 0.429817 4.00001 0.959977 4.00001L3.83998 4L5.75998 4.00001L8.63998 4.00001C9.17014 4.00001 9.59998 4.42985 9.59998 4.96001C9.59998 5.49017 9.17014 5.92001 8.63998 5.92001L5.75998 5.92001Z"
-                                fill="#EB5A1E"></path>
+                                d="M5.76 5.92L3.84 5.92L0.96 5.92C0.42984 5.92 0 5.49017 0 4.96C0 4.42984 0.42984 4 0.96 4L3.84 4L5.76 4L8.64 4C9.17016 4 9.6 4.42984 9.6 4.96C9.6 5.49017 9.17016 5.92 8.64 5.92L5.76 5.92Z"
+                                fill="#EB5A1E"
+                            ></path>
                         </svg>
                     </button>
                     <b>{count}</b>
                     <button
                         onClick={onClickPlus}
-                        className="button button--outline button--circle cart__item-count-plus">
-                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                             xmlns="http://www.w3.org/2000/svg">
+                        className="button button--outline button--circle cart__item-count-plus"
+                    >
+                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
-                                d="M5.92001 3.84V5.76V8.64C5.92001 9.17016 5.49017 9.6 4.96001 9.6C4.42985 9.6 4.00001 9.17016 4.00001 8.64L4 5.76L4.00001 3.84V0.96C4.00001 0.42984 4.42985 0 4.96001 0C5.49017 0 5.92001 0.42984 5.92001 0.96V3.84Z"
-                                fill="#EB5A1E"></path>
+                                d="M5.92 3.84V5.76V8.64C5.92 9.17016 5.49017 9.6 4.96 9.6C4.42984 9.6 4 9.17016 4 8.64L4 5.76L4 3.84V0.96C4 0.42984 4.42984 0 4.96 0C5.49017 0 5.92 0.42984 5.92 0.96V3.84Z"
+                                fill="#EB5A1E"
+                            ></path>
                             <path
-                                d="M5.75998 5.92001L3.83998 5.92001L0.959977 5.92001C0.429817 5.92001 -2.29533e-05 5.49017 -2.29301e-05 4.96001C-2.2907e-05 4.42985 0.429817 4.00001 0.959977 4.00001L3.83998 4L5.75998 4.00001L8.63998 4.00001C9.17014 4.00001 9.59998 4.42985 9.59998 4.96001C9.59998 5.49017 9.17014 5.92001 8.63998 5.92001L5.75998 5.92001Z"
-                                fill="#EB5A1E"></path>
+                                d="M5.76 5.92L3.84 5.92L0.96 5.92C0.42984 5.92 0 5.49017 0 4.96C0 4.42984 0.42984 4 0.96 4L3.84 4L5.76 4L8.64 4C9.17016 4 9.6 4.42984 9.6 4.96C9.6 5.49017 9.17016 5.92 8.64 5.92L5.76 5.92Z"
+                                fill="#EB5A1E"
+                            ></path>
                         </svg>
                     </button>
                 </div>
                 <div className="cart__item-price">
                     <b>{price * count} $</b>
-                </div>
-                <div className="cart__item-remove">
-                    <div onClick={onClickRemove} className="button button--outline button--circle">
-                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M5.92001 3.84V5.76V8.64C5.92001 9.17016 5.49017 9.6 4.96001 9.6C4.42985 9.6 4.00001 9.17016 4.00001 8.64L4 5.76L4.00001 3.84V0.96C4.00001 0.42984 4.42985 0 4.96001 0C5.49017 0 5.92001 0.42984 5.92001 0.96V3.84Z"
-                                fill="#EB5A1E"></path>
-                            <path
-                                d="M5.75998 5.92001L3.83998 5.92001L0.959977 5.92001C0.429817 5.92001 -2.29533e-05 5.49017 -2.29301e-05 4.96001C-2.2907e-05 4.42985 0.429817 4.00001 0.959977 4.00001L3.83998 4L5.75998 4.00001L8.63998 4.00001C9.17014 4.00001 9.59998 4.42985 9.59998 4.96001C9.59998 5.49017 9.17014 5.92001 8.63998 5.92001L5.75998 5.92001Z"
-                                fill="#EB5A1E"></path>
-                        </svg>
-                    </div>
                 </div>
             </div>
         </div>

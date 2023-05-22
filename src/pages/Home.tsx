@@ -8,6 +8,7 @@ import {selectStaffData} from "../redux/staff/selectors";
 import {fetchStaff} from "../redux/staff/asyncAction";
 import {selectCategory} from "../redux/filter/selectors";
 import {setCategoryId} from "../redux/filter/slice";
+import Skeleton from "../components/staffBlock/Skeleton";
 
 const Home: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -32,7 +33,7 @@ const Home: React.FC = () => {
 
     const filteredStaffs = categoryId !== 'all' ? products.filter((obj: any) => obj.category === categoryId) : products;
     const staffs = filteredStaffs.map((obj: any) => <StaffBlock key={obj.id} {...obj} />);
-
+    const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
     return (
         <div className='container'>
             <div className='content__top'>
@@ -46,7 +47,7 @@ const Home: React.FC = () => {
                 </div>
             ) : (
                 <div>
-                    <div className="content__items">{status === 'loading' ? null : staffs}</div>
+                    <div className="content__items">{status === 'loading' ? skeletons : staffs}</div>
                 </div>
             )}
         </div>
