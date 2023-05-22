@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectCart} from "../redux/cart/selectors";
 import {clearItem} from "../redux/cart/slice";
 import CartEmpty from "../components/cartEmpty/CartEmpty";
-import AddForm from "../components/form/AddForm";
+import AddForm from "../components/addForm/AddForm";
 
 const Cart: React.FC = () => {
     const dispatch = useDispatch();
