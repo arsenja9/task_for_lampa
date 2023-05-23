@@ -16,7 +16,6 @@ const Home: React.FC = () => {
     const categoryId = useAppSelector(selectCategory);
     const {status, items: products} = useAppSelector(selectStaffData);
 
-
     const onClickCategory = React.useCallback((id: number | string) => {
         dispatch(setCategoryId(id.toString()));
     }, []);
@@ -24,7 +23,7 @@ const Home: React.FC = () => {
     React.useEffect(() => {
         const category = categoryId !== 'all' ? `category=${categoryId}` : '';
         const getStaffs = async () => {
-            await dispatch(fetchStaff(category));
+            await dispatch(fetchStaff());
         };
 
         getStaffs();
